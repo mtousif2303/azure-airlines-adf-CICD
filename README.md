@@ -125,7 +125,7 @@ https://dev.azure.com/mtousif0303
 
 <img width="3430" height="1828" alt="image" src="https://github.com/user-attachments/assets/80a0824e-e801-43ea-b278-8904b6716ffa" />
 
-## This project uses a self-hosted agent running on a local machine instead of Microsoft's cloud-hosted agents to avoid the 1,800 free minutes/month limitation and $40/month costs for additional capacity. The self-hosted agent provides unlimited free pipeline runs, full control over the environment, and faster execution with cached dependencies - ideal for learning and frequent deployments. A Personal Access Token (PAT) is required to securely authenticate the agent with Azure DevOps, granting it specific permissions (Agent Pools, Deployments) to receive pipeline jobs and execute automated CI/CD workflows. Without the PAT, the agent cannot register with Azure DevOps, making automated deployments impossible.
+# This project uses a self-hosted agent running on a local machine instead of Microsoft's cloud-hosted agents to avoid the 1,800 free minutes/month limitation and $40/month costs for additional capacity. The self-hosted agent provides unlimited free pipeline runs, full control over the environment, and faster execution with cached dependencies - ideal for learning and frequent deployments. A Personal Access Token (PAT) is required to securely authenticate the agent with Azure DevOps, granting it specific permissions (Agent Pools, Deployments) to receive pipeline jobs and execute automated CI/CD workflows. Without the PAT, the agent cannot register with Azure DevOps, making automated deployments impossible.
 
 ### Create agent directory
 mkdir myagent && cd myagent
@@ -633,5 +633,6 @@ For issues and questions:
 ---
 
 **Last Updated:** February 2026
+
 
 
