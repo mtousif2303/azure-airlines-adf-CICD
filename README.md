@@ -141,10 +141,11 @@ sudo xattr -r -d com.apple.quarantine .
 
 ###Configure agent
 ./config.sh
-### Enter server URL: https://dev.azure.com/{your-org}
-### Enter PAT: [paste your token]
-### Enter agent pool: Default
-### Enter agent name: [press enter for default]
+
+## Enter server URL: https://dev.azure.com/{your-org}
+## Enter PAT: [paste your token]
+## Enter agent pool: Default
+## Enter agent name: [press enter for default]
 
 ### Run agent
 ./run.sh
@@ -632,4 +633,5 @@ For issues and questions:
 ---
 
 **Last Updated:** February 2026
+
 
