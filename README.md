@@ -98,9 +98,79 @@ An end-to-end data engineering solution for processing airline flight data with 
 
 ---
 
+a) ADLS
 
 
+<img width="3454" height="1532" alt="image" src="https://github.com/user-attachments/assets/4017fb06-d8c9-4133-a5ef-0b03a7030502" />
 
+<img width="3450" height="1546" alt="image" src="https://github.com/user-attachments/assets/cfd1a650-a05c-4453-b715-cd067691eac8" />
+
+b) Azure Data Factory
+
+i) Dev
+<img width="2918" height="1750" alt="image" src="https://github.com/user-attachments/assets/b3e4a648-a74f-41e0-9ee2-cb9c6c8b740c" />
+
+ii) Prod
+<img width="3112" height="1730" alt="image" src="https://github.com/user-attachments/assets/0acb674e-dff1-418b-bc13-5da7e4f903d9" />
+
+c) The Procssed data in ADLS
+
+<img width="3434" height="1972" alt="image" src="https://github.com/user-attachments/assets/60bc02fc-d767-46b3-9db7-5b8f05bbe2b3" />
+
+d) CI/CD pipeline useing Azure DevOPS
+
+https://dev.azure.com/mtousif0303
+
+<img width="3434" height="2048" alt="image" src="https://github.com/user-attachments/assets/c20b9c17-9ee6-42c4-91f6-244fafcc89ce" />
+
+<img width="3430" height="1828" alt="image" src="https://github.com/user-attachments/assets/80a0824e-e801-43ea-b278-8904b6716ffa" />
+
+## This project uses a self-hosted agent running on a local machine instead of Microsoft's cloud-hosted agents to avoid the 1,800 free minutes/month limitation and $40/month costs for additional capacity. The self-hosted agent provides unlimited free pipeline runs, full control over the environment, and faster execution with cached dependencies - ideal for learning and frequent deployments. A Personal Access Token (PAT) is required to securely authenticate the agent with Azure DevOps, granting it specific permissions (Agent Pools, Deployments) to receive pipeline jobs and execute automated CI/CD workflows. Without the PAT, the agent cannot register with Azure DevOps, making automated deployments impossible.
+
+### Create agent directory
+mkdir myagent && cd myagent
+
+### Download agent (macOS)
+curl -O https://vstsagentpackage.azureedge.net/agent/4.268.0/vsts-agent-osx-x64-4.268.0.tar.gz
+
+### Extract
+tar zxvf vsts-agent-osx-x64-4.268.0.tar.gz
+
+###Remove quarantine (macOS only)
+sudo xattr -r -d com.apple.quarantine .
+
+###Configure agent
+./config.sh
+### Enter server URL: https://dev.azure.com/{your-org}
+### Enter PAT: [paste your token]
+### Enter agent pool: Default
+### Enter agent name: [press enter for default]
+
+### Run agent
+./run.sh
+
+
+<img width="3436" height="2050" alt="image" src="https://github.com/user-attachments/assets/bbe06919-7dce-41c4-b396-5e28f028ceeb" />
+
+
+releases
+
+<img width="3426" height="1758" alt="image" src="https://github.com/user-attachments/assets/30d16a81-1109-444f-9be4-cc465d4d0513" />
+
+
+<img width="3444" height="1832" alt="image" src="https://github.com/user-attachments/assets/1fc1ac6d-c1fb-4cb6-a307-d719d712dcc2" />
+
+
+<img width="3446" height="1946" alt="image" src="https://github.com/user-attachments/assets/2a87db00-4bbd-42c2-a961-7e98ecf54990" />
+
+
+The final processed data 
+
+
+<img width="3068" height="1750" alt="image" src="https://github.com/user-attachments/assets/ec32482c-a6f1-448c-b3d8-af95c45d69fb" />
+
+
+<img width="3422" height="1760" alt="image" src="https://github.com/user-attachments/assets/90f03a91-fe95-45c6-b6b6-59e1a4e25f52" />
 
 
 
@@ -562,3 +632,4 @@ For issues and questions:
 ---
 
 **Last Updated:** February 2026
+
