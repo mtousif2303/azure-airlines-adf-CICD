@@ -1,0 +1,9 @@
+{
+	"name": "airline-adf-develop",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "7840e78a-a658-46c8-9f80-077818ee1e3c",
+		"tenantId": "36cc0216-8581-4438-baea-ce54547509ea"
+	}
+}

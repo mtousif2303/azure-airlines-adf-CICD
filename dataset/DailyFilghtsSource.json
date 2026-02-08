@@ -1,0 +1,46 @@
+{
+	"name": "DailyFilghtsSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageForDevAirline",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "flights.csv",
+				"folderPath": "landing-zn",
+				"fileSystem": "united-airlines"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Carrier",
+				"type": "String"
+			},
+			{
+				"name": "OriginAirportID",
+				"type": "String"
+			},
+			{
+				"name": "DestAirportID",
+				"type": "String"
+			},
+			{
+				"name": "DepDelay",
+				"type": "String"
+			},
+			{
+				"name": "ArrDelay",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

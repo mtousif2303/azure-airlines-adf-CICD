@@ -1,0 +1,110 @@
+{
+	"name": "AirlineDataTransformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AirlineDimSource",
+						"type": "DatasetReference"
+					},
+					"name": "AirportDimdata"
+				},
+				{
+					"dataset": {
+						"referenceName": "DailyFilghtsSource",
+						"type": "DatasetReference"
+					},
+					"name": "DailyFlightsData"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Processeddata",
+						"type": "DatasetReference"
+					},
+					"name": "writeProcessedData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "joinOnDeptAirport"
+				},
+				{
+					"name": "DeriveDeptAirportDetails"
+				},
+				{
+					"name": "JoinOnArrivalAirport"
+				},
+				{
+					"name": "DeriveArrivalAirport"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          airport_id as string,",
+				"          city as string,",
+				"          state as string,",
+				"          name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> AirportDimdata",
+				"source(output(",
+				"          Carrier as string,",
+				"          OriginAirportID as string,",
+				"          DestAirportID as string,",
+				"          DepDelay as string,",
+				"          ArrDelay as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> DailyFlightsData",
+				"DailyFlightsData, AirportDimdata join(OriginAirportID == airport_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinOnDeptAirport",
+				"joinOnDeptAirport select(mapColumn(",
+				"          Carrier,",
+				"          DestAirportID,",
+				"          DepDelay,",
+				"          ArrDelay,",
+				"          Depcity = city,",
+				"          Depstate = state,",
+				"          Depname = name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DeriveDeptAirportDetails",
+				"DeriveDeptAirportDetails, AirportDimdata join(DestAirportID == airport_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinOnArrivalAirport",
+				"JoinOnArrivalAirport select(mapColumn(",
+				"          Carrier,",
+				"          DepDelay,",
+				"          ArrDelay,",
+				"          Depcity,",
+				"          Depstate,",
+				"          Depname,",
+				"          Arrcity = city,",
+				"          Arrstate = state,",
+				"          Arrname = name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DeriveArrivalAirport",
+				"DeriveArrivalAirport sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0777,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> writeProcessedData"
+			]
+		}
+	}
+}
